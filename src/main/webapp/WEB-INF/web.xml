@@ -5,5 +5,4 @@
   xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_5_0.xsd"
   metadata-complete="false"
   version="5.0">
-
 </web-app>
