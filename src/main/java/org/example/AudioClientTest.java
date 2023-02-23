@@ -7,7 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class AudioClientTest {
-    private static final String BASE_URL = "http://localhost:8081/";
+    private static final String BASE_URL = "http://localhost:8080/";
     private static final int NUM_TRIALS = 10;
     private static final int NUM_THREADS = 10;
     private static final int[] CLIENT_RATIOS = { 2, 5, 10 };

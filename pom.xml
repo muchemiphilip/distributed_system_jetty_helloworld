@@ -29,6 +29,13 @@
             <version>${servlet.api.version}</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/com.konghq/unirest-objectmapper-jackson -->
+<dependency>
+    <groupId>com.konghq</groupId>
+    <artifactId>unirest-objectmapper-jackson</artifactId>
+    <version>4.0.0-RC7</version>
+</dependency>
+
         <dependency>
             <groupId>com.squareup.okhttp3</groupId>
             <artifactId>okhttp</artifactId>

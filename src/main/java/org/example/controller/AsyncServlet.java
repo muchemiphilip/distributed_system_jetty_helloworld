@@ -1,8 +1,14 @@
 package org.example.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import org.example.model.Audio;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.AsyncContext;
 import jakarta.servlet.ServletException;
@@ -16,7 +22,6 @@ public class AsyncServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     
-
     private final ExecutorService executorService = Executors.newFixedThreadPool(10);
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -41,12 +46,19 @@ public class AsyncServlet extends HttpServlet {
         public void run() {
             try {
                 // Perform the asynchronous operation here
-                Thread.sleep(5000); // sleep for 5 seconds to simulate an asynchronous operation
+                List<Audio> audioList = new ArrayList<>(); // create a list of Audio objects
+                audioList.add(new Audio("Artist 1", "Track ", "Album 1", 1, 2022, 10, 100)); 
+                audioList.add(new Audio("Artist 2", "Track 2", "Album 1", 1, 2022, 10, 100)); 
+                audioList.add(new Audio("Artist 3", "Track 3", "Album 1", 1, 2022, 10, 100)); 
+
+                // Serialize the list as JSON
+                ObjectMapper mapper = new ObjectMapper();
+                String audioJson = mapper.writeValueAsString(audioList);
 
                 // Write the response
                 HttpServletResponse response = (HttpServletResponse) asyncContext.getResponse();
-                response.setContentType("text/html");
-                response.getWriter().write("<html><body><h1>Async operation complete!</h1></body></html>");
+                response.setContentType("application/json"); // set content type to JSON
+                response.getWriter().write(audioJson);
 
                 // Complete the asynchronous operation
                 asyncContext.complete();

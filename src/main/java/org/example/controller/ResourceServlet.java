@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ResourceServlet", value = "ResourceServlet")
+@WebServlet(name = "ResourceServlet", value = "ResourceServlet", asyncSupported=true) 
 public class ResourceServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -72,7 +72,6 @@ public class ResourceServlet extends HttpServlet {
         });
     
     }
-    
 
     @Override
     public void destroy() {

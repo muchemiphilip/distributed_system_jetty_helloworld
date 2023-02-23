@@ -15,7 +15,7 @@ public class EmbeddingJettyStarter {
 
     public static void main(String[] args) throws Exception
     {
-        int port = 8081;
+        int port = 8080;
         String contextPath = "/coen6317";
 
         Server server = new Server(port);
