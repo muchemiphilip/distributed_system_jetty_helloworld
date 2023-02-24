@@ -1,0 +1,58 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: Audio API
+paths:
+  /audio:
+    post:
+      summary: Create a new audio item
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Audio'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Audio'
+    get:
+      summary: Retrieve an audio item's property value by key
+      parameters:
+        - in: query
+          name: key
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  value:
+                    type: string
+components:
+  schemas:
+    Audio:
+      type: object
+      properties:
+        artistName:
+          type: string
+        trackTitle:
+          type: string
+        albumTitle:
+          type: string
+        trackNumber:
+          type: integer
+        year:
+          type: integer
+        numReviews:
+          type: integer
+        numCopiesSold:
+          type: integer
