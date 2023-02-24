@@ -1,76 +1,84 @@
 package org.example.controller;
 
 import java.io.IOException;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import org.example.model.Audio;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import jakarta.servlet.AsyncContext;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ResourceServlet", value = "ResourceServlet", asyncSupported=true) 
+@WebServlet(name = "ResourceServlet", value = "ResourceServlet", asyncSupported = true)
 public class ResourceServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final AtomicInteger copiesSold = new AtomicInteger(0);
-    private static final Object lock = new Object();
-
     private final ExecutorService executor = Executors.newFixedThreadPool(10);
+
+    public final Map<String, Audio> audioData = BlockingServlet.audioData;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Use the AsyncServlet to handle the GET request
-        AsyncServlet asyncServlet = new AsyncServlet();
-        asyncServlet.doGet(request, response);
+        // Inside the doGet() method of ResourceServlet.java
 
+        // Create an instance of AsyncServlet
+        AsyncServlet asyncServlet = new AsyncServlet();
+
+        // Forward the request to AsyncServlet
+        asyncServlet.service(request, response);
+
+        // Retrieve the id parameter from the request URL
+        String id = request.getParameter("id");
+
+        if (id != null) {
+            // Retrieve the corresponding Audio object from the audioData map
+            Audio audio = audioData.get(id);
+
+            // Set the response content type to JSON
+            response.setContentType("application/json");
+            JSONObject audioObject = new JSONObject(audio);
+            response.getWriter().write(audioObject.toString());
+        } else {
+            JSONArray jsonArray = new JSONArray();
+            Collection<Audio> audios = audioData.values();
+            for (Audio audio : audios) {
+
+                JSONObject audioObject = new JSONObject();
+                audioObject.put("id", audio.getId());
+                audioObject.put("artistName", audio.getArtistName());
+                audioObject.put("trackTitle", audio.getTrackTitle());
+                audioObject.put("albumTitle", audio.getAlbumTitle());
+                audioObject.put("trackNumber", audio.getTrackNumber());
+                audioObject.put("year", audio.getYear());
+                audioObject.put("numReviews", audio.getNumReviews());
+                audioObject.put("numCopiesSold", audio.getNumCopiesSold());
+
+               // Add the JSONObject to the JSONArray
+                jsonArray.put(audioObject);            }
+               response.setContentType("application/json");
+               response.getWriter().write(jsonArray.toString());
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    
-        // Start asynchronous processing
-        final AsyncContext asyncContext = request.startAsync(request, response);
-    
-        // Use the executor to handle the background task of processing the request
-        executor.submit(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    // Use the BlockingServlet to handle the POST request
-                    BlockingServlet blockingServlet = new BlockingServlet();
-                    blockingServlet.doPost(request, (HttpServletResponse) asyncContext.getResponse());
-    
-                    // Retrieve the Audio object from the BlockingServlet
-                    Audio audio = blockingServlet.getAudio();
-    
-                    // Add the number of copies sold to the total copies sold count
-                    synchronized (lock) {
-                        copiesSold.addAndGet(audio.getNumCopiesSold());
-                    }
-    
-                    // Update the database with the new Audio object
-                    // ...
-    
-                    // Complete the asynchronous request
-                    asyncContext.complete();
-    
-                } catch (Exception e) {
-                    // Handle exceptions
-                    e.printStackTrace();
-                }
-            }
-        });
-    
+
+        BlockingServlet blockingServlet = new BlockingServlet();
+        blockingServlet.doPost(request, response);
+
     }
 
     @Override

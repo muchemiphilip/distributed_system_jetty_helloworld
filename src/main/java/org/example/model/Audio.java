@@ -1,21 +1,35 @@
-
 package org.example.model;
 
+import java.util.UUID;
+
 public class Audio {
+    private String id;
     private String artistName;
     private String trackTitle;
     private String albumTitle;
-    private int trackNumber;
-    private int year;
-    private int numReviews;
-    private int numCopiesSold;
+    private String trackNumber;
+    private String year;
+    private String numReviews;
+    private String numCopiesSold;
 
     // Constructor
     public Audio(){
 
     }
 
-    public Audio(String artistName, String trackTitle, String albumTitle, int trackNumber, int year, int numReviews, int numCopiesSold) {
+    public Audio(String artistName, String trackTitle, String albumTitle, String trackNumber, String year, String numReviews, String numCopiesSold) {
+        this.id = UUID.randomUUID().toString();
+        this.artistName = artistName;
+        this.trackTitle = trackTitle;
+        this.albumTitle = albumTitle;
+        this.trackNumber = trackNumber;
+        this.year = year;
+        this.numReviews = numReviews;
+        this.numCopiesSold = numCopiesSold;
+    }
+
+    public Audio(String id, String artistName, String trackTitle, String albumTitle, String trackNumber, String year, String numReviews, String numCopiesSold) {
+        this.id = id;
         this.artistName = artistName;
         this.trackTitle = trackTitle;
         this.albumTitle = albumTitle;
@@ -26,6 +40,14 @@ public class Audio {
     }
 
     // Getter and setter methods
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
     public String getArtistName() {
         return artistName;
     }
@@ -50,35 +72,42 @@ public class Audio {
         this.albumTitle = albumTitle;
     }
 
-    public int getTrackNumber() {
+    public String getTrackNumber() {
         return trackNumber;
     }
 
-    public void setTrackNumber(int trackNumber) {
+    public void setTrackNumber(String trackNumber) {
         this.trackNumber = trackNumber;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getNumReviews() {
+    public String getNumReviews() {
         return numReviews;
     }
 
-    public void setNumReviews(int numReviews) {
+    public void setNumReviews(String numReviews) {
         this.numReviews = numReviews;
     }
 
-    public int getNumCopiesSold() {
+    public String getNumCopiesSold() {
         return numCopiesSold;
     }
 
-    public void setNumCopiesSold(int numCopiesSold) {
+    public void setNumCopiesSold(String numCopiesSold) {
         this.numCopiesSold = numCopiesSold;
+    }
+
+    @Override
+    public String toString() {
+        return "Audio [id=" + id + ", artistName=" + artistName + ", trackTitle=" + trackTitle + ", albumTitle="
+                + albumTitle + ", trackNumber=" + trackNumber + ", year=" + year + ", numReviews=" + numReviews
+                + ", numCopiesSold=" + numCopiesSold + "]";
     }
 }
