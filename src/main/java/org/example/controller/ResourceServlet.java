@@ -2,7 +2,6 @@ package org.example.controller;
 
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -10,8 +9,6 @@ import java.util.concurrent.TimeUnit;
 import org.example.model.Audio;
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;

@@ -13,7 +13,6 @@ public class AudioClientTest {
     private static final int[] CLIENT_RATIOS = { 2, 5, 10 };
     private static final int[] CLIENT_TOTALS = { 10, 50, 100 };
     private static final int[] GET_RATIOS = { 1, 2 };
-    private static final int[] POST_RATIOS = { 1, 2 };
     private static final int TIMEOUT = 5000; // milliseconds
 
     private ExecutorService executor;

@@ -28,17 +28,6 @@ public class Audio {
         this.numCopiesSold = numCopiesSold;
     }
 
-    public Audio(String id, String artistName, String trackTitle, String albumTitle, String trackNumber, String year, String numReviews, String numCopiesSold) {
-        this.id = id;
-        this.artistName = artistName;
-        this.trackTitle = trackTitle;
-        this.albumTitle = albumTitle;
-        this.trackNumber = trackNumber;
-        this.year = year;
-        this.numReviews = numReviews;
-        this.numCopiesSold = numCopiesSold;
-    }
-
     // Getter and setter methods
     public String getId() {
         return id;

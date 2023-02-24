@@ -40,21 +40,7 @@ public class BlockingServlet extends HttpServlet {
 
                 JSONArray audioArray = new JSONArray(
                         IOUtils.toString(request.getInputStream().readAllBytes(), "UTF-8"));
-                // Set the Audio object as a property of the BlockingServlet instance
-                // String id = request.getParameter("id");
-                // String artistName = request.getParameter("artistName");
-                // String trackTitle = request.getParameter("trackTitle");
-                // String albumTitle = request.getParameter("albumTitle");
-                // String trackNumber = request.getParameter("trackNumber");
-                // String year = request.getParameter("year");
-                // String numReviews = request.getParameter("numReviews");
-                // String numCopiesSold = request.getParameter("numCopiesSold");
 
-                // Audio audio = new Audio(id,artistName, trackTitle, albumTitle, trackNumber,
-                // year, numReviews, numCopiesSold);
-                // synchronized(audioData) {
-                // audioData.put(audio.getId(), audio);
-                // }
                 for (int i = 0; i < audioArray.length(); i++) {
                     JSONObject audioObject = audioArray.getJSONObject(i);
                     String artistName = audioObject.getString("artistName");
@@ -65,14 +51,13 @@ public class BlockingServlet extends HttpServlet {
                     String numReviews = Integer.toString(audioObject.getInt("numReviews"));
                     String numCopiesSold = Integer.toString(audioObject.getInt("numCopiesSold"));
 
-                    Audio audio = new Audio(artistName, trackTitle, albumTitle, trackNumber,
-                            year, numReviews, numCopiesSold);
+                    Audio audio = new Audio(artistName, trackTitle, albumTitle, trackNumber,year, numReviews, numCopiesSold);
                     audioData.put(audio.getId(), audio);
                     System.out.println("Audio id is :: " + audio.getId());
                 }
                 response.setStatus(HttpStatus.OK_200);
                 response.setContentType("application/json");
-                String jsonResponse = "{\"statusMessage\":\"Track posted successfully\"}";
+                String jsonResponse = "{\"statusMessage\":\"Audio record added successfully\"}";
                 response.getOutputStream().write(jsonResponse.getBytes());
                 return null;
             }
