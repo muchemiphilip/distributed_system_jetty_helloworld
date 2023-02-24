@@ -1,8 +1,7 @@
 package org.example.model;
 
-import java.util.UUID;
-
 public class Audio {
+    private static int counter = 1;
     private String id;
     private String artistName;
     private String trackTitle;
@@ -18,7 +17,8 @@ public class Audio {
     }
 
     public Audio(String artistName, String trackTitle, String albumTitle, String trackNumber, String year, String numReviews, String numCopiesSold) {
-        this.id = UUID.randomUUID().toString();
+        //set a counter fro the id to start incrementing from 01
+        this.id = String.format("%02d", counter++);
         this.artistName = artistName;
         this.trackTitle = trackTitle;
         this.albumTitle = albumTitle;
@@ -100,3 +100,4 @@ public class Audio {
                 + ", numCopiesSold=" + numCopiesSold + "]";
     }
 }
+

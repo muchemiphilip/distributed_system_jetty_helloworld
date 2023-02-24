@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
+
 import org.example.model.Audio;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +17,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "ResourceServlet", value = "ResourceServlet", asyncSupported = true)
+@WebServlet(name = "ResourceServlet", value = "/ResourceServlet", asyncSupported = true)
 public class ResourceServlet extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
@@ -27,19 +28,11 @@ public class ResourceServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        // Inside the doGet() method of ResourceServlet.java
-
-        // Create an instance of AsyncServlet
-        AsyncServlet asyncServlet = new AsyncServlet();
-
-        // Forward the request to AsyncServlet
-        asyncServlet.service(request, response);
-
+        throws ServletException, IOException {
         // Retrieve the id parameter from the request URL
         String id = request.getParameter("id");
 
-        if (id != null) {
+        if (id != null && audioData.containsKey(id)) {
             // Retrieve the corresponding Audio object from the audioData map
             Audio audio = audioData.get(id);
 
@@ -47,11 +40,11 @@ public class ResourceServlet extends HttpServlet {
             response.setContentType("application/json");
             JSONObject audioObject = new JSONObject(audio);
             response.getWriter().write(audioObject.toString());
-        } else {
+
+        } else if (id == null) {
             JSONArray jsonArray = new JSONArray();
             Collection<Audio> audios = audioData.values();
             for (Audio audio : audios) {
-
                 JSONObject audioObject = new JSONObject();
                 audioObject.put("id", audio.getId());
                 audioObject.put("artistName", audio.getArtistName());
@@ -62,10 +55,17 @@ public class ResourceServlet extends HttpServlet {
                 audioObject.put("numReviews", audio.getNumReviews());
                 audioObject.put("numCopiesSold", audio.getNumCopiesSold());
 
-               // Add the JSONObject to the JSONArray
-                jsonArray.put(audioObject);            }
-               response.setContentType("application/json");
-               response.getWriter().write(jsonArray.toString());
+                // Add the JSONObject to the JSONArray
+                jsonArray.put(audioObject);
+            }
+            // Set the response content type to JSON
+            response.setContentType("application/json");
+            response.getWriter().write(jsonArray.toString());
+        } else {
+            // Set the response content type to JSON and displaying an error message
+            response.setContentType("application/json");
+            String jsonResponse = "{\"statusMessage\":\"Requested ID does not exist\"}";
+            response.getOutputStream().write(jsonResponse.getBytes());
         }
     }
 

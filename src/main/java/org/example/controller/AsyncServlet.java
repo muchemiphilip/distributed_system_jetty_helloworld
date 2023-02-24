@@ -10,11 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 @WebServlet(name = "AsyncServlet", value = "/async-servlet", asyncSupported = true)
 public class AsyncServlet extends HttpServlet {
-
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -33,7 +30,6 @@ public class AsyncServlet extends HttpServlet {
                 PrintWriter writer = response.getWriter();
 
                 // Write the response
-                // writer.write("Async operation complete!");
                 writer.flush();
 
             } catch (InterruptedException | IOException e) {
