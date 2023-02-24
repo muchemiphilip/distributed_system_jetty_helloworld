@@ -1,0 +1,92 @@
+[
+  {
+    "trackNumber": "1",
+    "numCopiesSold": "5000000",
+    "year": "1997",
+    "numReviews": "2000",
+    "albumTitle": "OK Computer",
+    "artistName": "Radiohead",
+    "id": "1",
+    "trackTitle": "Airbag"
+  },
+  {
+    "trackNumber": "1",
+    "numCopiesSold": "10000000",
+    "year": "1984",
+    "numReviews": "5000",
+    "albumTitle": "Purple Rain",
+    "artistName": "Prince",
+    "id": "2",
+    "trackTitle": "Let's Go Crazy"
+  },
+  {
+    "trackNumber": "3",
+    "numCopiesSold": "3000000",
+    "year": "1998",
+    "numReviews": "1000",
+    "albumTitle": "Ray of Light",
+    "artistName": "Madonna",
+    "id": "3",
+    "trackTitle": "Ray of Light"
+  },
+  {
+    "trackNumber": "2",
+    "numCopiesSold": "10000000",
+    "year": "1982",
+    "numReviews": "4000",
+    "albumTitle": "Thriller",
+    "artistName": "Michael Jackson",
+    "id": "4",
+    "trackTitle": "Billie Jean"
+  },
+  {
+    "trackNumber": "5",
+    "numCopiesSold": "500000",
+    "year": "2019",
+    "numReviews": "500",
+    "albumTitle": "When We All Fall Asleep, Where Do We Go?",
+    "artistName": "Billie Eilish",
+    "id": "5",
+    "trackTitle": "Bad Guy"
+  },
+  {
+    "trackNumber": "4",
+    "numCopiesSold": "2000000",
+    "year": "1993",
+    "numReviews": "1500",
+    "albumTitle": "Siamese Dream",
+    "artistName": "The Smashing Pumpkins",
+    "id": "6",
+    "trackTitle": "Cherub Rock"
+  },
+  {
+    "trackNumber": "1",
+    "numCopiesSold": "7000000",
+    "year": "1976",
+    "numReviews": "3000",
+    "albumTitle": "Hotel California",
+    "artistName": "Eagles",
+    "id": "7",
+    "trackTitle": "Hotel California"
+  },
+  {
+    "trackNumber": "1",
+    "numCopiesSold": "4000000",
+    "year": "1991",
+    "numReviews": "2000",
+    "albumTitle": "Nevermind",
+    "artistName": "Nirvana",
+    "id": "8",
+    "trackTitle": "Smells Like Teen Spirit"
+  },
+  {
+    "trackNumber": "6",
+    "numCopiesSold": "1000000",
+    "year": "1989",
+    "numReviews": "500",
+    "albumTitle": "Disintegration",
+    "artistName": "The Cure",
+    "id": "9",
+    "trackTitle": "Lovesong"
+  }
+]

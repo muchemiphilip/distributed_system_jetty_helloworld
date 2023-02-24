@@ -33,7 +33,7 @@ public class AsyncServlet extends HttpServlet {
                 PrintWriter writer = response.getWriter();
 
                 // Write the response
-                writer.write("Async operation complete!");
+                // writer.write("Async operation complete!");
                 writer.flush();
 
             } catch (InterruptedException | IOException e) {
